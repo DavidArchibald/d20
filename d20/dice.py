@@ -208,7 +208,9 @@ class Roller:
         except lark.UnexpectedInput as ui:
             # if the statement up to the unexpected token ends with an operator, remove that from the end
             successful_fragment = expr[:ui.pos_in_stream]
-            for op in SetOperator.OPERATIONS:
+            operators = SetOperator.OPERATIONS
+            operators.add("d")
+            for op in operators:
                 if successful_fragment.endswith(op):
                     successful_fragment = successful_fragment[:-len(op)]
                     force_comment = expr[len(successful_fragment):]

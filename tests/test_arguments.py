@@ -17,6 +17,11 @@ def test_comments():
     assert 1 <= r.total <= 20
     assert r.comment == "keep something"
 
+    # expressions with the possibility of being a dice
+    r = roll("1d20 + 10 dungeons and dragons", allow_comments=True)
+    assert 11 <= r.total <= 30
+    assert r.comment == "dungeons and dragons"
+
     with pytest.raises(RollSyntaxError):
         roll("1d20 keep something", allow_comments=False)
 
